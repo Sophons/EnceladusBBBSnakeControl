@@ -66,7 +66,7 @@
 	
 	<group ns="BBB2">
 		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+350 --command"/>
-		<node pkg="snake" type="BBBMain" name="BBBMain"/>
+		<node machine="BBB2" pkg="snake" type="BBBMain" name="BBBMain"/>
 	</group>
 
 	<group ns="BBB3">

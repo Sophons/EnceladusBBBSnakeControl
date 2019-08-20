@@ -9,9 +9,7 @@
 #include <memory>
 
 
-#include "motor-control/library/gpio.h"
-#include "motor-control/library/pwm.h"
-#include "motor-control/library/util.h"
+
 #include "motor-control/MotorControl.h"
 
 #define PI 3.1415
@@ -28,6 +26,9 @@ double period = 0.01;
 double rate = 100.0;
 bool newCommandSent = false;
 int robotStateNum = 1;
+
+const unsigned int enc_addr[] = { 0x40, 0x41, 0x42 }; // Encoder addresses
+const int Kp = 0.08, Ki = 0.0, Kd = 0.0; // PID values
 
 
 //Initialize some messages
@@ -199,6 +200,7 @@ int main(int argc, char** argv){
 	//Initialize TrajectoryPlanner objects for Pitch and Yaw
 	TrajectoryPlanner PitchPlanner;
 	TrajectoryPlanner YawPlanner;
+
 	
 	//Start up encoders and PID controllers
 	for (int i = 0; i < NUM_MOTORS; i++) {

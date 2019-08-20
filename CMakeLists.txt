@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(snakecontrol)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+ add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -162,8 +162,14 @@ include_directories(
 				src/motor-control/MotorControl.h
 				src/motor-control/PID.cpp
 				src/motor-control/PID.hpp
+				src/motor-control/library/gpio.cpp
+				src/motor-control/library/gpio.h
+				src/motor-control/library/I2CBus.cpp
+				src/motor-control/library/I2CBus.h
+				src/motor-control/library/pwm.cpp
+				src/motor-control/library/pwm.h
 				)
- target_link_libraries(BBBMain2 ${catkin_LIBRARIES}  )
+ target_link_libraries(BBBMain2 ${catkin_LIBRARIES}  /usr/lib/librobotcontrol.so)
 
  #add_executable(SnakeCommander src/SnakeCommander.cpp  )
  #target_link_libraries(SnakeCommander ${catkin_LIBRARIES}  )
