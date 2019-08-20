@@ -1,0 +1,40 @@
+<launch>
+	<machine
+	  name="BBB2"
+	  address="BBB2"
+	  env-loader="~/catkin_ws/env.sh"
+	  user="debian"
+	  password="temppwd"
+	/>
+
+	<node
+		pkg="testconnection"
+		type="madIMU"
+		name="madIMU"
+		machine="BBB2"
+	/>
+
+	<node
+		pkg="testconnection"
+		type="ARFaccel"
+		name="ARFaccel"
+		machine="BBB2"
+	/>
+	
+	<node
+		pkg="testconnection"
+		type="IKaccel"
+		name="IKaccel"
+		machine="BBB2"
+		output="screen"
+	/>
+	
+	<node
+		pkg="testconnection"
+		type="ORIgyro"
+		name="ORIgyro"
+		machine="BBB2"
+		output="screen"
+	/>
+
+</launch>

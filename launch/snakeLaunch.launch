@@ -1,0 +1,77 @@
+<launch>
+  <!-- INFO -->
+        <machine
+            name="BBB2"
+            address="BBB2"
+            env-loader="~/catkin_ws/env.sh"
+            user="debian"
+            password="temppwd"
+        />
+
+        <arg name="ori_DEV" value="0.1" />
+        <arg name="linAcc_covar" value="0.00616" />
+        <arg name="angVel_covar" value="0.1" />
+        <arg name="magFld_covar" value="3.0" />
+
+
+
+  <!-- ROBOT STATE PUBLISHER -->
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="rob_st_pub">
+		<remap from="joint_states" to="JointState" /> 
+	</node>
+<!--
+	<node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+		<param name="use_gui" value="true" />
+		<rosparam param="source_list">["/JointState"]</rosparam>
+	</node>
+-->
+	<param name="robot_description" command="cat $(find snake)/urdfFiles/snake.urdf" />
+	
+
+	<node pkg="tf" type="static_transform_publisher" name="link1_tf_publisher" args="0 0 0 0 0 0 odom link1 10"/>
+	<!-- <node pkg="snake" type="fake_state_pub" name="fake_state_pub" /> -->
+
+	<node pkg="rviz" type="rviz" name="rviz" /> 
+
+
+  <!-- IMU LAUNCHING -->
+<!--
+	<group ns="BBB2">
+		<node machine="BBB2" pkg="testconnection" type="madIMU" name="madIMU" >
+			<param name="linAcc_covar" value="$(arg linAcc_covar)" />
+			<param name="angVel_covar" value="$(arg angVel_covar)" />
+			<param name="magFld_covar" value="$(arg magFld_covar)" />
+		</node>
+
+		<node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_node">
+	                <param name="use_magnetic_field_msg" type="bool" value="true" />
+	                <param name="use_mag" type="bool" value="true" />
+	                <param name="orientation_stddev" value="$(arg ori_DEV)" />
+			<param name="publish_tf" value="true" />
+	        </node>
+
+	</group>
+
+	<node pkg="snake" type="imuPosOri" name="imuPosOri" />
+-->
+
+ <!-- FILTER STUFFS -->
+	<!-- <node pkg="snake" type="MeasurementModelEigenTransform" name="MeasurementModelEigenTransform" output="screen"/> -->
+
+ <!-- CONTROL STUFF -->
+	<group ns="BBB1">
+		<node pkg="snake" type="BBBMain" name="BBBMain" />
+		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+0 --command"/>
+	</group>
+	
+	<group ns="BBB2">
+		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+350 --command"/>
+		<node pkg="snake" type="BBBMain" name="BBBMain"/>
+	</group>
+
+	<group ns="BBB3">
+		<node pkg="snake" type="BBBMain" name="BBBMain"/>
+		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+650 --command"/>
+	</group>
+	
+</launch>
