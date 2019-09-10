@@ -60,18 +60,18 @@
 
  <!-- CONTROL STUFF -->
 	<group ns="BBB1">
-		<node pkg="snake" type="BBBMain" name="BBBMain" />
 		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+0 --command"/>
+		<node pkg="snake" type="BBBMain" name="BBBMain" />
 	</group>
 	
 	<group ns="BBB2">
 		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+350 --command"/>
-		<node machine="BBB2" pkg="snake" type="BBBMain" name="BBBMain"/>
+		<node machine="BBB2" pkg="snakecontrol" type="BBBMain2" name="BBBMain"/>
 	</group>
 
 	<group ns="BBB3">
-		<node pkg="snake" type="BBBMain" name="BBBMain"/>
 		<node pkg="snake" type="SnakeCommander" name="SnakeCommander" output="screen" launch-prefix="gnome-terminal --geometry 50x15+0+650 --command"/>
+		<node pkg="snake" type="BBBMain" name="BBBMain"/>
 	</group>
 	
 </launch>

@@ -152,24 +152,36 @@ include_directories(
  #target_link_libraries(MeasurementModelEigenTransform ${catkin_LIBRARIES} -I/usr/include/eigen3)
 
  
- add_executable(BBBMain2 
-				src/BBBMain2.cpp  
-				src/TrajPlanner.cpp   
-				src/TrajPlanner.h
-				src/motor-control/Encoder.cpp
-				src/motor-control/Encoder.hpp
-				src/motor-control/MotorControl.cpp
-				src/motor-control/MotorControl.h
-				src/motor-control/PID.cpp
-				src/motor-control/PID.hpp
-				src/motor-control/library/gpio.cpp
-				src/motor-control/library/gpio.h
-				src/motor-control/library/I2CBus.cpp
-				src/motor-control/library/I2CBus.h
-				src/motor-control/library/pwm.cpp
-				src/motor-control/library/pwm.h
+ #add_executable(BBBMain2 
+				#src/BBBMain2.cpp  
+				#src/TrajPlanner.cpp   
+				#src/TrajPlanner.h
+				#src/motor-control/Encoder.cpp
+				#src/motor-control/Encoder.hpp
+				#src/motor-control/MotorControl.cpp
+				#src/motor-control/MotorControl.h
+				#src/motor-control/PID.cpp
+				#src/motor-control/PID.hpp
+				#src/motor-control/library/gpio.cpp
+				#src/motor-control/library/gpio.h
+				#src/motor-control/library/I2CBus.cpp
+				#src/motor-control/library/I2CBus.h
+				#src/motor-control/library/pwm.cpp
+				#src/motor-control/library/pwm.h
+				#)
+ #target_link_libraries(BBBMain2 ${catkin_LIBRARIES}  /usr/lib/librobotcontrol.so)
+
+add_executable(BBB 
+				src/BBB.cpp  
+				src/BBB.h 
+				../../../motor-control/MotorControl.cpp 
+				../../../motor-control/MotorControl.h 
+				../../../motor-control/PID.cpp 
+				../../../motor-control/PID.hpp 
+				../../../motor-control/Encoder.cpp 
+				../../../motor-control/Encoder.hpp
 				)
- target_link_libraries(BBBMain2 ${catkin_LIBRARIES}  /usr/lib/librobotcontrol.so)
+ target_link_libraries(BBB ${catkin_LIBRARIES}  /usr/lib/librobotcontrol.so)
 
  #add_executable(SnakeCommander src/SnakeCommander.cpp  )
  #target_link_libraries(SnakeCommander ${catkin_LIBRARIES}  )
